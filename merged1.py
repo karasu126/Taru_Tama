@@ -483,7 +483,7 @@ class QrisPage:
             img = Image.open(image_data)
             img = img.resize((280, 280))
             img = ImageTk.PhotoImage(img)
-            label = tk.Label(self.frame, image=img, bg="#18656A", bd=1.5, relief="solid")
+            label = tk.Label(self.frame, image=img, bg="#E8E8E8", bd=1.5, relief="solid")
             label.image = img
             label.place(relx=0.5, rely=0.43, anchor="center")
         except FileNotFoundError:
