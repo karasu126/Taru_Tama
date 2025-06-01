@@ -90,7 +90,10 @@ class LoginPage:
         header = tk.Frame(self.frame, bg="#2f4f3c", height=100)
         header.pack(fill="x")
 
-        tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#2f4f3c", fg="white", relief="flat").place(x=5, y=5)
+        # tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#2f4f3c", fg="white", relief="flat").place(x=5, y=5)
+
+        kembali_btn = tk.Button(self.frame, text="<<<<", command=lambda: self.show_page("start"), width=5, height=2, bg="#8ba98f", fg="#2f4f3c", font=("Inter", 12), anchor="center")
+        kembali_btn.place(relx=0.05, rely=0.035)
 
         form = tk.Frame(self.frame, bg="#8ba98f")
         form.pack(fill="both", expand=True)
@@ -140,7 +143,10 @@ class SignupPage:
         header = tk.Frame(self.frame, bg="#8ba98f", height=100)
         header.pack(fill="x")
 
-        tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#8ba98f", fg="black", relief="flat").place(x=5, y=5)
+        # tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#8ba98f", fg="black", relief="flat").place(x=5, y=5)
+
+        kembali_btn = tk.Button(self.frame, text="<<<<", command=lambda: self.show_page("start"), width=5, height=2, bg="#2f4f3c", fg="#8ba98f", font=("Inter", 12), anchor="center")
+        kembali_btn.place(relx=0.05, rely=0.035)
 
         form = tk.Frame(self.frame, bg="#2f4f3c")
         form.pack(fill="both", expand=True)
@@ -350,7 +356,7 @@ class Donasi:
     def __init__(self, container, show_page):
         self.container = container
         self.show_page = show_page
-        self.entry_var = tk.IntVar()
+        self.entry_var = tk.StringVar()
         self.label_var = tk.IntVar()
         self.create_widgets()
 
@@ -361,17 +367,23 @@ class Donasi:
         label_judul = tk.Label(self.frame, text="DONASI", fg="#DEE693", bg="#436651", font=("Inter", 18, "bold"))
         label_judul.place(relx=0.5, rely=0.135, anchor="center")
 
-        label_harga = tk.Label(self.frame, text="1 Pohon = Rp. 20.000", fg="#0A2736", 
-                             bg="#DEE693", font=("Inter", 12, "bold"), justify="left")
+        label_harga = tk.Label(self.frame, text="1 Pohon = Rp. 20.000", fg="#0A2736", bg="#DEE693", font=("Inter", 12, "bold"), justify="left")
         label_harga.place(relx=0.5, rely=0.25, width=250, height=50, anchor="center")
 
         label_pohon = tk.Label(self.frame, text="Pohon", fg="#0A2736", bg="#DEE693", font=("Inter", 12, "bold"))
         label_pohon.place(relx=0.523, rely=0.35, width=115, height=50, anchor="w")
 
         self.entry_var.trace_add("write", self.hitung_donasi)
-        
-        entry_pohon = tk.Entry(self.frame, justify="center", textvariable=self.entry_var, bg="#DEE693", fg="#0A2736", font=("Inter", 12, "bold"))
+
+        vcmd = (self.frame.register(self.only_int), "%P")
+        entry_pohon = tk.Entry(self.frame, justify="center", textvariable=self.entry_var, validate="key", validatecommand=vcmd, bg="#DEE693", fg="#0A2736", font=("Inter", 12, "bold"))
         entry_pohon.place(relx=0.187, rely=0.35, relwidth=0.1, anchor="w", width=80, height=50)
+
+        entry_pohon.insert(0, "0")  # Tampilkan placeholder "0"
+
+        # Hilangkan saat diklik
+        entry_pohon.bind("<FocusIn>", lambda e: self.clear_placeholder(entry_pohon))
+        entry_pohon.bind("<FocusOut>", lambda e: self.restore_placeholder(entry_pohon))
 
         label_rupiah = tk.Label(self.frame, text="Rp.", fg="#0A2736", bg="#DEE693", font=("Inter", 12, "bold"), anchor="center")
         label_rupiah.place(relx=0.187, rely=0.45, relwidth=0.1, anchor="w", width=80, height=50)
@@ -385,16 +397,30 @@ class Donasi:
         kembali_btn = tk.Button(self.frame, text="KEMBALI", command=lambda: self.show_page("main_menu"), width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
         kembali_btn.place(relx=0.5, rely=0.825, anchor="center")
 
+    def clear_placeholder(self, entry):
+        if entry.get() == "0":
+            entry.delete(0, tk.END)
+            entry.config(fg="#0A2736")  # Warna normal teks
+
+    def restore_placeholder(self, entry):
+        if entry.get().strip() == "":
+            entry.insert(0, "0")
+            entry.config(fg="#888888")  # Warna abu-abu seperti placeholder
+
+    def only_int(self, new_text):
+        return new_text.isdigit() or new_text == ""
+
     def hitung_donasi(self, *args):
-        try:
-            input_pengguna = self.entry_var.get()
-            if input_pengguna == 0:
-                self.label_var.set(0)
-            else:
-                total_donasi = input_pengguna * 20000
-                self.label_var.set(total_donasi)
-        except ValueError:
+        value = self.entry_var.get().strip()
+        if value == "":
             self.label_var.set(0)
+        else:
+            try:
+                total = int(value)*20000
+                self.label_var.set(total)
+            except ValueError:
+                self.label_var.set(0)
+                messagebox.showinfo("Salah lu bang", "pakai integer lah, masa jumlah pohon abcd")
 
 class HasilEmisi:
     def __init__(self, container, show_page, data=None):
@@ -461,7 +487,7 @@ class QrisPage:
             label.image = img
             label.place(relx=0.5, rely=0.43, anchor="center")
         except FileNotFoundError:
-            label = tk.Label(self.frame, text="Gambar QRIS tidak ditemukan\nPastikan gambar file berada di repositori yang sama", fg="#DEE693", bg="#18656A", font=("Arial", 12))
+            label = tk.Label(self.frame, text="Gambar QRIS tidak ditemukan. linknya error?", fg="#DEE693", bg="#18656A", font=("Arial", 12))
             label.place(relx=0.5, rely=0.5, anchor="center")
 
         cek_status_btn = tk.Button(self.frame, text="Cek Status Pembayaran", command=self.cek_status, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
