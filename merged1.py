@@ -3,6 +3,8 @@ from tkinter import messagebox
 import math
 import os
 import json
+import requests
+from io import BytesIO
 from PIL import ImageTk, Image
 
 class App:
