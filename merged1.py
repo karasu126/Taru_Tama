@@ -446,7 +446,13 @@ class QrisPage:
         label_subjudul.place(relx=0.5, rely=0.185, anchor="center")
 
         try:
-            img = Image.open("qris_barcode.png")
+            url = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1Pl2OgcZJp0v4sTtS7xvR9n7Tkx1v1i-2uSzMVO-z8zGaIgUDc_N_AoSXY6kvlaLboij5tObKS-_25uVCm8tFteWPFJIpEyBUaFAxjCyYJEQ48_0U_UOZLuQ-bsQw_HDCnsw9n6Lni5Ry/s1600/QR_code_for_mobile_English_Wikipedia.svg.png"
+            response = requests.get(url)
+            if response.status_code == 200:
+                image_data = BytesIO(response.content)
+            else:
+                label = tk.Label(self.frame, text="Gambar QRIS tidak ditemukan. linknya error?", fg="#DEE693", bg="#18656A", font=("Arial", 12))
+            img = Image.open(image_data)
             img = img.resize((280, 280))
             img = ImageTk.PhotoImage(img)
             label = tk.Label(self.frame, image=img, bg="#18656A", bd=1.5, relief="solid")
