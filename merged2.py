@@ -3,6 +3,8 @@ from tkinter import messagebox
 import math
 import os
 import json
+import requests
+from io import BytesIO
 from PIL import ImageTk, Image
 
 class App:
@@ -88,10 +90,7 @@ class LoginPage:
         header = tk.Frame(self.frame, bg="#2f4f3c", height=100)
         header.pack(fill="x")
 
-        # tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#2f4f3c", fg="white", relief="flat").place(x=5, y=5)
-
-        kembali_btn = tk.Button(self.frame, text="<<<<", command=lambda: self.show_page("start"), width=5, height=2, bg="#8ba98f", fg="#2f4f3c", font=("Inter", 12), anchor="center")
-        kembali_btn.place(relx=0.05, rely=0.035)
+        tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#2f4f3c", fg="white", relief="flat").place(x=5, y=5)
 
         form = tk.Frame(self.frame, bg="#8ba98f")
         form.pack(fill="both", expand=True)
@@ -141,10 +140,7 @@ class SignupPage:
         header = tk.Frame(self.frame, bg="#8ba98f", height=100)
         header.pack(fill="x")
 
-        # tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#8ba98f", fg="black", relief="flat").place(x=5, y=5)
-
-        kembali_btn = tk.Button(self.frame, text="<<<<", command=lambda: self.show_page("start"), width=5, height=2, bg="#2f4f3c", fg="#8ba98f", font=("Inter", 12), anchor="center")
-        kembali_btn.place(relx=0.05, rely=0.035)
+        tk.Button(header, text="<", command=lambda: self.show_page("start"), bg="#8ba98f", fg="black", relief="flat").place(x=5, y=5)
 
         form = tk.Frame(self.frame, bg="#2f4f3c")
         form.pack(fill="both", expand=True)
@@ -452,7 +448,13 @@ class QrisPage:
         label_subjudul.place(relx=0.5, rely=0.185, anchor="center")
 
         try:
-            img = Image.open("qris_barcode.png")
+            url = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1Pl2OgcZJp0v4sTtS7xvR9n7Tkx1v1i-2uSzMVO-z8zGaIgUDc_N_AoSXY6kvlaLboij5tObKS-_25uVCm8tFteWPFJIpEyBUaFAxjCyYJEQ48_0U_UOZLuQ-bsQw_HDCnsw9n6Lni5Ry/s1600/QR_code_for_mobile_English_Wikipedia.svg.png"
+            response = requests.get(url)
+            if response.status_code == 200:
+                image_data = BytesIO(response.content)
+            else:
+                label = tk.Label(self.frame, text="Gambar QRIS tidak ditemukan. linknya error?", fg="#DEE693", bg="#18656A", font=("Arial", 12))
+            img = Image.open(image_data)
             img = img.resize((280, 280))
             img = ImageTk.PhotoImage(img)
             label = tk.Label(self.frame, image=img, bg="#18656A", bd=1.5, relief="solid")
