@@ -386,10 +386,7 @@ class DonasiPage:
         tombol_donasi = tk.Button(self.frame, text="BAYAR", command=self.handle_payment, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
         tombol_donasi.place(relx=0.5, rely=0.725, anchor="center")
 
-        kembali_btn = tk.Button(self.frame, text="KEMBALI", 
-                             command=self.controller.show_main_menu_page, 
-                             width=20, height=2, bg="#D9D9D9", fg="#0A2736", 
-                             font=("Inter", 12))
+        kembali_btn = tk.Button(self.frame, text="KEMBALI", command=self.controller.show_main_menu_page, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
         kembali_btn.place(relx=0.5, rely=0.825, anchor="center")
 
     def clear_placeholder(self):
@@ -436,15 +433,13 @@ class HasilEmisiPage:
         self.frame = tk.Frame(container, bg="#18656A")
         self.frame.place(x=0, y=0, width=412, height=717)
 
-        label_narasi_emisi = tk.Label(self.frame, text="EMISI\nKarbon Anda:", bg="#18656A", 
-       fg="#DEE693", font=("Inter", 18, "bold"), justify="left")
+        label_narasi_emisi = tk.Label(self.frame, text="EMISI\nKarbon Anda:", bg="#18656A", fg="#DEE693", font=("Inter", 18, "bold"), justify="left")
         label_narasi_emisi.place(relx=0.5, rely=0.175, anchor="e")
 
         label_emisi = tk.Label(self.frame, text=f"{self.data['emisi']:.2f}", bg="#DEE693", fg="#0A2736", font=("Inter", 18, "bold"), justify="left", padx=5, pady=5)
         label_emisi.place(relx=0.1, rely=0.26, width=220, height=45, anchor="w")
 
-        label_satuan_emisi = tk.Label(self.frame, text="KG", bg="#DEE693", fg="#0A2736", 
-       font=("Inter", 18, "bold"), justify="right")
+        label_satuan_emisi = tk.Label(self.frame, text="KG", bg="#DEE693", fg="#0A2736", font=("Inter", 18, "bold"), justify="right")
         label_satuan_emisi.place(relx=0.9, rely=0.26, width=85, height=45, anchor="e")
 
         label_narasi_pohon = tk.Label(self.frame, text="Membutuhkan:", bg="#18656A", fg="#DEE693", font=("Inter", 18, "bold"), justify="left")
