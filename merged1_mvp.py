@@ -481,8 +481,7 @@ class QrisPage:
                 label.image = img
                 label.place(relx=0.5, rely=0.43, anchor="center")
             else:
-                label = tk.Label(self.frame, text="Gagal memuat gambar QRIS", 
- fg="#DEE693", bg="#18656A", font=("Inter", 12))
+                label = tk.Label(self.frame, text="Gagal memuat gambar QRIS", fg="#DEE693", bg="#18656A", font=("Inter", 12))
                 label.place(relx=0.5, rely=0.5, anchor="center")
         except Exception as e:
             label = tk.Label(self.frame, text="Gagal memuat gambar QRIS", fg="#DEE693", bg="#18656A", font=("Inter", 12))
