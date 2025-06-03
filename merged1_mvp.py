@@ -134,9 +134,9 @@ class StartPage:
 
         tk.Canvas(self.frame, width=50, height=80, bg="#436651", highlightthickness=0).place(relx=0.5, y=200, anchor="center")
 
-        tk.Button(self.frame, text="Login", bg="white", command=self.controller.show_login_page, relief="flat", font=("Inter", 10, "bold")).place(relx=0.5, rely=0.6, anchor="center", width=150, height=35)
+        tk.Button(self.frame, text="LOG IN", bg="white", command=self.controller.show_login_page, relief="flat", font=("Inter", 10, "bold")).place(relx=0.5, rely=0.6, anchor="center", width=150, height=35)
 
-        tk.Button(self.frame, text="Sign Up", bg="white", command=self.controller.show_signup_page, relief="flat", font=("Inter", 10, "bold")).place(relx=0.5, rely=0.67, anchor="center", width=150, height=35)
+        tk.Button(self.frame, text="SIGN UP", bg="white", command=self.controller.show_signup_page, relief="flat", font=("Inter", 10, "bold")).place(relx=0.5, rely=0.67, anchor="center", width=150, height=35)
 
 class LoginPage:
     def __init__(self, container, controller):
@@ -163,10 +163,10 @@ class LoginPage:
         self.login_password = tk.Entry(form, show="*")
         self.login_password.pack(padx=20, fill="x")
 
-        tk.Button(form, text="Login", bg="white", font=("Inter", 10, "bold"), command=self.handle_login).pack(pady=10, ipadx=10, ipady=2)
+        tk.Button(form, text="LOGIN", bg="white", font=("Inter", 10, "bold"), command=self.handle_login).pack(pady=10, ipadx=10, ipady=2)
 
         tk.Label(form, text="Belum punya akun?", bg="#8ba98f").pack(side="left", padx=(30, 2), pady=10)
-        tk.Button(form, text="Sign Up", bg="#8ba98f", fg="blue", font=("Inter", 9, "bold"), relief="flat", command=self.controller.show_signup_page).pack(side="left")
+        tk.Button(form, text="SIGN UP", bg="#8ba98f", fg="blue", font=("Inter", 9, "bold"), relief="flat", command=self.controller.show_signup_page).pack(side="left")
 
     def handle_login(self):
         email = self.login_email.get()
@@ -202,7 +202,7 @@ class SignupPage:
         self.entry_password = tk.Entry(form, show="*")
         self.entry_password.pack(padx=20, fill="x")
 
-        tk.Button(form, text="Sign Up", bg="white", font=("Inter", 10, "bold"), command=self.handle_signup).pack(pady=10, ipadx=10, ipady=2)
+        tk.Button(form, text="SIGN UP", bg="white", font=("Inter", 10, "bold"), command=self.handle_signup).pack(pady=10, ipadx=10, ipady=2)
 
         tk.Label(form, text="Sudah punya akun?", bg="#2f4f3c", fg="white").pack(side="left", padx=(30, 2), pady=10)
         tk.Button(form, text="Login", bg="#2f4f3c", fg="lightblue", font=("Inter", 9, "bold"), relief="flat", command=self.controller.show_login_page).pack(side="left")
@@ -243,10 +243,10 @@ class KalkulatorPage:
         kembali_btn = tk.Button(self.frame, text="<<<<", command=self.controller.show_main_menu_page, width=5, height=2, bg="#DEE693", fg="#0A2736", font=("Inter", 12), anchor="center")
         kembali_btn.place(relx=0.05, rely=0.035)
 
-        tombol_kendaraan = tk.Button(self.frame, text="Kendaraan", width=20, height=2, bg="#DEE693", fg="#0A2736", font=("Inter", 12), command=self.controller.show_transportasi_page)
+        tombol_kendaraan = tk.Button(self.frame, text="KENDARAAN", width=20, height=2, bg="#DEE693", fg="#0A2736", font=("Inter", 12), command=self.controller.show_transportasi_page)
         tombol_kendaraan.place(relx=0.3, rely=0.45, anchor="center")
 
-        tombol_elektronik = tk.Button(self.frame, text="Elektronik", command=self.controller.show_elektronik_page, width=20, height=2, bg="#DEE693", fg="#0A2736", font=("Inter", 12))
+        tombol_elektronik = tk.Button(self.frame, text="ELEKTRONIK", command=self.controller.show_elektronik_page, width=20, height=2, bg="#DEE693", fg="#0A2736", font=("Inter", 12))
         tombol_elektronik.place(relx=0.7, rely=0.6, anchor="center")
 
 class TransportasiPage:
@@ -273,7 +273,7 @@ class TransportasiPage:
             entry.place(relx=0.5, rely=rely_entry, anchor="center", width=200, height=30)
             self.entries[name] = entry
 
-        hitung_btn = tk.Button(self.frame, text="Hitung", command=self.handle_calculation, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
+        hitung_btn = tk.Button(self.frame, text="HITUNG", command=self.handle_calculation, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
         hitung_btn.place(relx=0.5, rely=0.725, anchor="center")
 
         kembali_btn = tk.Button(self.frame, text="KEMBALI", command=self.controller.show_kalkulator_page, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
@@ -320,7 +320,7 @@ class ElektronikPage:
             entry.place(relx=0.5, rely=rely_entry, anchor="center", width=200, height=30)
             self.entries[name] = entry
 
-        hitung_btn = tk.Button(self.frame, text="Hitung", command=self.handle_calculation, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
+        hitung_btn = tk.Button(self.frame, text="HITUNG", command=self.handle_calculation, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
         hitung_btn.place(relx=0.5, rely=0.725, anchor="center")
 
         kembali_btn = tk.Button(self.frame, text="KEMBALI", command=self.controller.show_kalkulator_page, width=20, height=2, bg="#D9D9D9", fg="#0A2736", font=("Inter", 12))
