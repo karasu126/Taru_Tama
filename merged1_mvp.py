@@ -12,7 +12,6 @@ class Model:
     def __init__(self):
         self.user_data = None
         self.carbon_data = None
-        self.donation_data = None
 
     def login_user(self, email, password):
         filename = os.path.join("data_akun", f"{email.replace('@','_at_')}.json")
@@ -87,7 +86,6 @@ class View:
     def setup_window(self):
         self.root.title("Ksatria Taru")
 
-        # Set window size and position
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         window_width = 400
@@ -410,7 +408,6 @@ class DonasiPage:
             try:
                 total = int(value)*20000
                 self.label_var.set(total)
-                self.controller.set_donation_amount(total)
             except ValueError:
                 self.label_var.set(0)
                 messagebox.showerror("Error", "Masukkan jumlah pohon yang valid")
@@ -496,13 +493,13 @@ class QrisPage:
     def cek_status(self):
         messagebox.showinfo("Status Pembayaran", "Donasi Berhasil Terkirim🎉🎉🎉")
 
-# CONTROLLER (Logic)
+# CONTROLLER
 class Controller:
     def __init__(self, root):
         self.model = Model()
         self.view = View(root, self)
 
-    # method navigasi ke jendela tertentu 
+    # method navigasi ke jendela tertentu
     def show_start_page(self):
         self.view.show_page("start")
 
@@ -582,14 +579,8 @@ class Controller:
         except ValueError:
             messagebox.showerror("Error", "Input tidak valid")
 
-    # Donation methods
-    def set_donation_amount(self, amount):
-        self.model.donation_data = {"amount": amount}
-
     def process_payment(self):
         messagebox.showinfo("Status Pembayaran", "Donasi Berhasil Terkirim🎉🎉🎉")
-
-# APPLICATION ENTRY POINT
 
 if __name__ == "__main__":
     root = tk.Tk()
