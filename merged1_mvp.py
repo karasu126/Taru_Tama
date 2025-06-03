@@ -223,13 +223,13 @@ class MainMenuPage:
         kembali_btn.place(relx=0.05, rely=0.035)
 
         kalkulator_btn = tk.Button(self.frame, text="KALKULATOR KARBON", command=self.controller.show_kalkulator_page, width=20, height=2, bg="#8FC07C", fg="#0A2736", font=("Inter", 12))
-        kalkulator_btn.place(relx=0.3, rely=0.45, anchor="center")
+        kalkulator_btn.place(relx=0.5, rely=0.45, anchor="center")
 
         donasi_btn = tk.Button(self.frame, text="DONASI", command=self.controller.show_donasi_page, width=20, height=2, bg="#8FC07C", fg="#0A2736", font=("Inter", 12))
-        donasi_btn.place(relx=0.7, rely=0.6, anchor="center")
+        donasi_btn.place(relx=0.5, rely=0.6, anchor="center")
 
         keluar_btn = tk.Button(self.frame, text="KELUAR", command=self.controller.logout, width=20, height=2, bg="#8FC07C", fg="#0A2736", font=("Inter", 12))
-        keluar_btn.place(relx=0.3, rely=0.75, anchor="center")
+        keluar_btn.place(relx=0.5, rely=0.75, anchor="center")
 
 class KalkulatorPage:
     def __init__(self, container, controller):
